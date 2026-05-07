@@ -24,8 +24,9 @@ Attempted:
 - Added push/pull helper scripts:
   - `PushToGitHub.bat`
   - `PullFromGitHub.bat`
-  - `scripts/git_push.ps1`
-  - `scripts/git_pull.ps1`
+  - `git_tools/git_push.ps1`
+  - `git_tools/git_pull.ps1`
+- Moved Git automation into `git_tools/` so `scripts/` stays focused on experiment and parsing scripts.
 
 Learned:
 - Git initially blocked the folder with a dubious ownership warning, so this exact project path was added to Git's global `safe.directory` list.

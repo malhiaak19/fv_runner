@@ -30,7 +30,7 @@ if (-not $Message) {
 
 git add -A
 
-$hasStagedChanges = git diff --cached --quiet
+git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
     git commit -m $Message
 } else {
