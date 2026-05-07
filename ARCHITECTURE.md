@@ -6,6 +6,34 @@ This project is a small experiment runner for formal verification comparisons. I
 
 ## Data Flow
 
+```mermaid
+graph TD
+    subgraph Configuration
+        B[configs/benchmarks.py] -->|Benchmark dictionaries| R[scripts/run_experiments.py]
+    end
+
+    subgraph "Execution"
+        R -->|1. Build| RS[RunSpec per benchmark mode]
+        RS -->|2. Patch/generate| TCL[Generated TCL]
+        TCL -->|3. Invoke| OS[OneSpin shell]
+    end
+
+    subgraph "Output Artifacts"
+        OS -->|Main tool log| L[logs/design/mode/*.log]
+        OS -->|stdout/stderr| SE[logs/design/mode/*.stdout.txt and *.stderr.txt]
+        OS -->|JSON metadata| M[results/metadata/*.json]
+        OS -->|QIP protocols, orch only| Q[logs/design/orch/qip_protocols/]
+    end
+
+    subgraph "Data Analysis"
+        L -->|Parse| PL[scripts/parse_logs.py]
+        M -->|Parse| PL
+        PL -->|Export| CSV[results/summary.csv]
+        Q -->|qverify_event| PQ[scripts/parse_qip_events.py]
+        PQ -->|Export| EL[results/qip_event_logs/]
+    end
+```
+
 1. Benchmark selection
    - Source: `configs/benchmarks.py`
    - Data: list of benchmark dictionaries with `name`, `script_path`, optional `engines_comb`, and `modes`.
@@ -109,4 +137,3 @@ Open Question:
 - Should the project have a single command entry point for run, parse logs, and parse QIP events?
 - Should generated TCL files be stored inside `fv_runner` instead of external benchmark directories?
 - Should `results/runs.csv` and `results/run_metadata.json` be removed, regenerated, or documented as legacy placeholders?
-

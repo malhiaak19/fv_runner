@@ -20,6 +20,12 @@ Linux project path:
 /home/aakasha/fv_runner
 ```
 
+OneSpin/QVerify methodology guide path:
+
+```bash
+/usr/local/misc/qed_qos/onespin/lib/tutorials/qef_methodology_guides
+```
+
 Remote host via jump server:
 
 ```bash
@@ -90,6 +96,12 @@ Go to the project:
 
 ```bash
 cd ~/fv_runner
+```
+
+Go to the QEF methodology guides:
+
+```bash
+cd /usr/local/misc/qed_qos/onespin/lib/tutorials/qef_methodology_guides
 ```
 
 Parse QIP event logs for one design:
@@ -168,4 +180,3 @@ Command:
 
 Notes:
 - 
-
